@@ -1,4 +1,5 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
+// src/redux/reducers/authReducer.js
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, SIGNUP_SUCCESS, SIGNUP_FAIL } from '../actions/types';
 
 const initialState = {
   isAuthenticated: localStorage.getItem('isAuthenticated') === 'true',
@@ -28,7 +29,22 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
-        user: null
+        user: null,
+        error: null
+      };
+    case SIGNUP_SUCCESS:
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('user', JSON.stringify(action.payload));
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        error: null
+      };
+    case SIGNUP_FAIL:
+      return {
+        ...state,
+        error: action.payload
       };
     default:
       return state;

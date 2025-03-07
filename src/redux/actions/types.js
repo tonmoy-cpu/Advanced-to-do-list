@@ -1,6 +1,10 @@
+// src/redux/actions/types.js
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'; // Add this line
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';     // Add this line
 
 export const GET_TASKS = 'GET_TASKS';
 export const ADD_TASK = 'ADD_TASK';

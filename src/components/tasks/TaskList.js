@@ -1,76 +1,70 @@
-import React, { useEffect } from 'react';
+// src/components/tasks/TaskList.js
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTasks } from '../../redux/actions/taskActions';
 import TaskInput from './TaskInput';
 import TaskItem from './TaskItem';
 import WeatherWidget from '../weather/WeatherWidget';
+import TaskViewToggle from './TaskViewToggle';
 import './TaskList.css';
 
 const TaskList = () => {
   const dispatch = useDispatch();
   const { tasks, error } = useSelector(state => state.tasks);
   const { user } = useSelector(state => state.auth);
-  
+  const [view, setView] = useState('list');
+
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
-  
-  // Group tasks by priority
-  const highPriorityTasks = tasks.filter(task => task.priority === 'high');
-  const mediumPriorityTasks = tasks.filter(task => task.priority === 'medium');
-  const lowPriorityTasks = tasks.filter(task => task.priority === 'low');
-  
+
+  const completedTasks = tasks.filter(task => task.completed);
+  const incompleteTasks = tasks.filter(task => !task.completed);
+
   return (
     <div className="task-list-container">
       <div className="welcome-section">
-        <h2>Welcome, {user?.name || 'User'}</h2>
+        <h2>Welcome, {user?.name || ' User '}</h2>
         <p>Manage your tasks efficiently</p>
       </div>
-      
+
+      <TaskViewToggle view={view} setView={setView} />
+
       <div className="content-section">
         <div className="left-panel">
           <TaskInput />
-          <WeatherWidget />
+          <WeatherWidget location={user?.location} />
         </div>
-        
+
         <div className="right-panel">
           {error ? (
             <div className="error-message">{error}</div>
           ) : (
             <div className="tasks-display">
               <h2>Your Tasks</h2>
-              
+
               {tasks.length === 0 ? (
                 <p className="no-tasks-message">No tasks yet. Add one now!</p>
               ) : (
-                <div className="tasks-by-priority">
-                  {highPriorityTasks.length > 0 && (
-                    <div className="priority-group high-priority">
-                      <h3>High Priority</h3>
-                      {highPriorityTasks.map(task => (
-                        <TaskItem key={task.id} task={task} />
-                      ))}
-                    </div>
+                <>
+                  <h3>Incomplete Tasks</h3>
+                  {incompleteTasks .length === 0 ? (
+                    <p>No incomplete tasks.</p>
+                  ) : (
+                    incompleteTasks.map(task => (
+                      <TaskItem key={task.id} task={task} view={view} />
+                    ))
                   )}
-                  
-                  {mediumPriorityTasks.length > 0 && (
-                    <div className="priority-group medium-priority">
-                      <h3>Medium Priority</h3>
-                      {mediumPriorityTasks.map(task => (
-                        <TaskItem key={task.id} task={task} />
-                      ))}
-                    </div>
+
+                  <h3>Completed Tasks</h3>
+                  {completedTasks.length === 0 ? (
+                    <p>No completed tasks.</p>
+                  ) : (
+                    completedTasks.map(task => (
+                      <TaskItem key={task.id} task={task} view={view} />
+                    ))
                   )}
-                  
-                  {lowPriorityTasks.length > 0 && (
-                    <div className="priority-group low-priority">
-                      <h3>Low Priority</h3>
-                      {lowPriorityTasks.map(task => (
-                        <TaskItem key={task.id} task={task} />
-                      ))}
-                    </div>
-                  )}
-                </div>
+                </>
               )}
             </div>
           )}

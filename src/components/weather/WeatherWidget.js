@@ -1,28 +1,26 @@
+// src/components/weather/WeatherWidget.js
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeather } from '../../redux/actions/weatherActions';
 import './WeatherWidget.css';
 
-const WeatherWidget = () => {
-  const [location, setLocation] = useState('New York');
-  const [searchLocation, setSearchLocation] = useState('');
+const WeatherWidget = ({ location }) => {
+  const [searchLocation, setSearchLocation] = useState(location || 'New York');
   
   const dispatch = useDispatch();
   const { weather, loading, error } = useSelector(state => state.weather);
   
   useEffect(() => {
-    dispatch(getWeather(location));
-  }, [dispatch, location]);
+    dispatch(getWeather(searchLocation));
+  }, [dispatch, searchLocation]);
   
   const handleSearch = e => {
     e.preventDefault();
     if (searchLocation.trim()) {
-      setLocation(searchLocation);
-      setSearchLocation('');
+      dispatch(getWeather(searchLocation));
     }
   };
-  
-  // Weather icon mapping
+
   const getWeatherIcon = (weatherCode) => {
     const icons = {
       '01': 'fas fa-sun', // clear sky
