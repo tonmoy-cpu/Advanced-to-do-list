@@ -1,0 +1,55 @@
+.app-header {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-greeting {
+    margin-right: 1rem;
+  }
+  
+  .btn-logout {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .btn-logout:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn-login-link {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .btn-login-link:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  @media (max-width: 576px) {
+    .app-header {
+      padding: 1rem;
+    }
+    
+    .logo a {
+      font-size: 1.2rem;
+    }
+  }

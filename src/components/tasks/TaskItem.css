@@ -1,0 +1,105 @@
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .task-item:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .task-content {
+    flex: 1;
+  }
+  
+  .task-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .task-location {
+    font-size: 0.85rem;
+    color: #666;
+    display: block;
+  }
+  
+  .task-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .priority-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-right: 0.75rem;
+    color: white;
+  }
+  
+  .priority-badge.high {
+    background-color: var(--high-priority);
+  }
+  
+  .priority-badge.medium {
+    background-color: var(--medium-priority);
+    color: #333;
+  }
+  
+  .priority-badge.low {
+    background-color: var(--low-priority);
+    color: #333;
+  }
+  
+  .btn-edit, .btn-delete {
+    background: none;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .btn-edit {
+    color: #666;
+  }
+  
+  .btn-edit:hover {
+    color: var(--primary-color);
+  }
+  
+  .btn-delete {
+    color: #999;
+  }
+  
+  .btn-delete:hover {
+    color: var(--danger-color);
+  }
+  
+  .edit-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit-actions select {
+    width: auto;
+    margin-right: 0.5rem;
+  }
+  
+  .btn-save {
+    background-color: var(--success-color);
+    color: white;
+    margin-right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .btn-cancel {
+    background-color: #ccc;
+    color: #333;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+  }
